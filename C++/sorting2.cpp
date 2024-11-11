@@ -12,6 +12,11 @@ void swapInt(int *a, int*b)
 // MergeSort
 /*
     Divide and Merge
+    divide is O(log2(n))
+    merge is O(n) for worst case
+    so time complexity O(n * log2(n))
+
+    space complexity -> O(n) at the worst case
 */
 
 void merge(vector<int> &arr, int low, int mid, int high)
@@ -20,7 +25,7 @@ void merge(vector<int> &arr, int low, int mid, int high)
     int left = low;
     int right = mid+1;
 
-    while(low <= mid && right <= high)
+    while(left<= mid && right <= high)
     {
         if(arr[left] <= arr[right])
         {
@@ -72,16 +77,15 @@ int main()
 {
     int n,num=0;
     cin >> n;
-    vector<int> arr = {5,83,85,84,1,8,67,4,78,16,25,49,2,8,17};
+    vector<int> arr; // = {5,83,85,84,1,8,67,4,78,16,25,49,2,8,17};
     
-    /*
+    
     for(int i=0; i<n; i++)
     {
         cin >> num;
         arr.push_back(num);
     }
-    */
-
+    
     mergeSort(arr,0,(n-1));
    
     for(auto it: arr)
