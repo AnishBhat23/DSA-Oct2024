@@ -9,7 +9,7 @@ void swapInt(int *a, int*b)
     *b = temp;
 }
 
-// Longest Subarray with sum K (positives)
+// Longest Subarray with sum K (positives/negatives)
 
 /*
     Brute force approach-> 
@@ -23,6 +23,17 @@ void swapInt(int *a, int*b)
         x-k lies and compare indices to get the maxLen subarray
         Time complexity -> O(N*log2N)
         Space complexity -> O(N)
+
+        This is the optimal solution if the array 
+        has both positives and negatives
+
+    Optimal Solution->  
+        Use two pointers and increment the right pointer
+        until we find K. Once we find k, increment the left pointer
+        until sum < k and then start incrementing the right pointer
+        Sliding window type iteration. 
+        Time complexity -> O(2N)
+        Space complexity -> O(1)
 */
 
 int longestSubarraySumKBrute1(int arr[], int n, int s)
@@ -95,6 +106,31 @@ int longestSubArraySumKHashing(int a[], int n, long long k)
 
     return maxLen;
 }
+
+int longestSubarraySumKOptimal(int a[], int n, long long k)
+{
+    long long sum = a[0]; 
+    int longLen = 0;
+    int left = 0, right = 0;    
+    while(right < n)
+    {
+        while(left <= right && sum > k)
+        {
+            sum -= a[left];
+            left++;
+        }
+        if(sum == k)
+        {
+            longLen = max(longLen, right-left+1);
+        }
+        right++;
+        if(right < n)
+        {
+            sum += a[right];
+        }
+    }
+    return longLen;
+}   
 
 int main()
 {
