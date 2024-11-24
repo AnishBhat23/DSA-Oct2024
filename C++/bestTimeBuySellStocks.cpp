@@ -10,6 +10,19 @@ using namespace std;
         Use two loops to generate every
         transaction and compare the profits of
         each transcation to find the most profit. 
+        TC -> O(pow(n,2))
+        SC -> O(1)
+    
+    Optimal Approach -> 
+        We will linearly travel the array. 
+        We can maintain a minimum from the start 
+        of the array and compare it with every 
+        element of the array, if it is greater 
+        than the minimum then take the difference 
+        and maintain it in max, otherwise update the minimum.
+
+        TC -> O(n)
+        SC -> O(1)
 */
 
 int bestTimeBuySellStocks(int arr[], int n)
