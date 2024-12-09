@@ -24,11 +24,63 @@ void swapInt(int *a, int*b)
         SC -> O(1)
 
     Better Approach -> 
-        Sort 
+        Sort the array and run a for loop to find the 
+        longest consecutive sequence.
+        Iterate through the array one by one and check 
+        if it can be part of the sequence. 
+        lastSmaller- to store the last included of the 
+        current sequence. 
+        cnt - to store the length of the current sequence
+        longest - to store the maximum length
+        if arr[i]-1 == lastSmaller it means that arr[i] is in 
+        sequence. 
+        if arr[i] == lastsmaller, skip it.
+        if arr[i] != lastsmaller means it is not part of 
+        this sequence. so this will be start of a new sequence.
+
+        TC -> O(NlogN) + O(N)
+        SC -> O(1)
+
+    Optimal approach -> 
+        Add all elements in the array to a set 
+        data structure. 
+        Select an element ele and check if ele - 1 exists. 
+        If not that is the first element in the sequence. 
+        cnt - length of current sequence. 
+        longest - maximum length
+
+        
 
 */
 
+int longestConsecutiveSequence_better(int arr[], int n)
+{
+    sort(&arr[0],&arr[n-1]);
+    int lastSmaller = INT_MIN;
+    int cnt = 0;
+    int longest = 1;
 
+    for(int i = 0; i < n; i++)
+    {
+        if(arr[i]-1 == lastSmaller)
+        {
+            lastSmaller = arr[i];
+            cnt++;
+        }
+        else if(arr[i] == lastSmaller)
+        {
+            //skip
+        }
+        else if(arr[i] != lastSmaller)
+        {
+            lastSmaller = arr[i];
+            cnt = 1;
+        }
+        longest = max(longest,cnt);
+    }
+
+    return longest;
+}
 
 
 int main()
