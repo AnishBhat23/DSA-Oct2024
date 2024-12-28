@@ -48,9 +48,9 @@ void swapInt(int *a, int*b)
         If not that is the first element in the sequence. 
         cnt - length of current sequence. 
         longest - maximum length
-
-        
-
+        check for all the elements after ele and increment
+        cnt until an element is not found. 
+        update the longest
 */
 
 int longestConsecutiveSequence_better(int arr[], int n)
@@ -79,6 +79,36 @@ int longestConsecutiveSequence_better(int arr[], int n)
         longest = max(longest,cnt);
     }
 
+    return longest;
+}
+
+int longestConsecutiveSequence_optimal(int arr[], int n)
+{
+    if(n == 0)
+    {
+        return 0;
+    }
+    int longest = 1;
+    unordered_set<int> st;
+    for(int i=0; i<n; i++)
+    {
+        st.insert(arr[i]);
+    }
+
+    for(auto it: st)
+    {
+        //if 'it' is a starting number:
+        if (st.find(it - 1) == st.end()) {
+            //find consecutive numbers:
+            int cnt = 1;
+            int x = it;
+            while (st.find(x + 1) != st.end()) {
+                x = x + 1;
+                cnt = cnt + 1;
+            }
+            longest = max(longest, cnt);
+        }
+    }
     return longest;
 }
 
