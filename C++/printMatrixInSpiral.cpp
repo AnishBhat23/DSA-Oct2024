@@ -11,6 +11,9 @@ using namespace std;
         to top.
         Repeat this until we reach the centre.
 
+        TC -> O(NxM)
+        SC -> O(NxM)
+
 */
 
 void printMatrixInSpiral(vector<vector<int>> matrix)
