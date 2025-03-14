@@ -18,7 +18,9 @@ using namespace std;
     SC -> O(N)
 
     Optimal Approach 1 -> Use the formula for summation S = n*(n+1)/2 and formula for 
-                          square of summation 
+                          square of summation to find the missing and repeating number
+    TC -> O(N)
+    SC -> O(1)
 
 */
 
@@ -48,7 +50,7 @@ vector<int> findRepeatingAndMissingNumber(vector<int> arr)
     return {repeating, missing};
 }
 
-vector<int> findRepeatingAndMissingNumber_optimal(vector<int> arr)
+vector<int> findRepeatingAndMissingNumber_optimal1(vector<int> arr)
 {
     long long n = arr.size();
     
@@ -65,13 +67,78 @@ vector<int> findRepeatingAndMissingNumber_optimal(vector<int> arr)
         S2 += ((long long)arr[i] * (long long)arr[i]);
     }
 
-    long long res1 = S - Sn; //X - Y
+    long long res1 = S - Sn; // X - Y
     long long res2 = S2 -S2n;
     res2 = res2/res1; // X + Y
     X = (res2+res1)/2;
     Y = X - res1;
 
     return {(int)X, (int)Y};
+
+}
+
+vector<int> findRepeatingAndMissingNumber_optimal2(vector<int> a)
+{
+    long long n = a.size();
+    int xr = 0;
+    
+    for(int i=0; i<n; i++)
+    {
+        xr = xr ^ a[i];
+        xr = xr ^ (i+1);
+    }
+
+    int bitNo = xr & ~(xr - 1);
+
+    // while(1)
+    // {
+    //     if(xr & (1<<bitNo) != 0)
+    //     {
+    //         break;
+    //     }
+    //     bitNo++;
+    // }
+
+    int zero = 0;
+    int one = 0;
+
+    for(int i=0; i<n; i++)
+    {
+       if((a[i] & (1<<bitNo)) != 0)
+       {
+            one = one ^ a[i];
+       } 
+       else
+       {
+            zero = zero ^ a[i];
+       }
+    }
+
+    for(int i=1; i<=n; i++)
+    {
+       if((i & (1<<bitNo)) != 0)
+       {
+            one = one ^ i;
+       } 
+       else
+       {
+            zero = zero ^ i;
+       }
+    }
+    int cnt = 0;
+    for(int i = 0; i<n; i++)
+    {
+        if(a[i] == zero)
+            cnt++;
+    }
+    if(cnt == 2)
+    {
+        return {zero, one};
+    }
+    else
+    {
+        return {one, zero};
+    }
 
 }
 
@@ -89,7 +156,7 @@ int main()
 	}
 
     vector<int> ans;
-    ans = findRepeatingAndMissingNumber_optimal(arr1);
+    ans = findRepeatingAndMissingNumber_optimal1(arr1);
     
     for (auto it : ans) 
     {
