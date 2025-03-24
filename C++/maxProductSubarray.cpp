@@ -2,7 +2,32 @@
 using namespace std;
 
 /*
-    
+    Given an array that contains both negative and positive integers, 
+    find the maximum product subarray. 
+
+    Brute Force -> Find all possible subarrays of the given array. 
+                   Find the product of each subarray. 
+                   Return the maximum of all them.
+    TC -> O(pow(n,3))
+    SC -> O(1)
+
+    Better Approach -> We can optimize the brute force by making 
+                       3 nested iterations to 2 nested iterations.
+                       Following are the steps for the approach:
+                        -> Run a loop to find the start of the subarrays.
+                        -> Run another nested loop
+                        -> Multiply each element and store the maximum value of all the subarray.
+    TC -> O(pow(n,2))
+    SC -> O(1)
+
+    Optimal Approcah -> By observation we see that if an array contains all 
+                        positive numbers, the whole array is the maxProductSubarray. 
+                        If the array has even number of negative numbers, again the 
+                        whole array is a subarray. We just need to account for when
+                        there are odd number of negative numbers and when zeroes are 
+                        present. 
+    TC -> O(N)
+    SC -> O(1)
 */
 
 
@@ -42,6 +67,22 @@ int maxProductSubarray_better(vector<int> arr)
     }
 
     return max_prod;
+}
+
+int maxProductSubArray_optimal(vector<int> arr)
+{
+    int n = arr.size(); //size of array.
+
+    int pre = 1, suff = 1;
+    int ans = INT_MIN;
+    for (int i = 0; i < n; i++) {
+        if (pre == 0) pre = 1;
+        if (suff == 0) suff = 1;
+        pre *= arr[i];
+        suff *= arr[n - i - 1];
+        ans = max(ans, max(pre, suff));
+    }
+    return ans;
 }
 
 int main()
