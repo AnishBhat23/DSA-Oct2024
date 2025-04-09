@@ -12,6 +12,12 @@ using namespace std;
                       first occured element.
     TC -> O(n) in worst case
     SC -> O(1)
+
+    Optimal Approach -> Find lower bound (first occurance) and upper bound - 1 
+                        (last occurance) using binary search
+    
+    TC -> O(2log2(n))
+    SC -> O(1)
     
 */
 
@@ -78,8 +84,8 @@ pair<int,int> findFirstandLastOccurance_optimal(vector<int> &arr, int target)
     int last_occur = -1, first_occur = -1;
     if(arr.size() > 0)
     {
-        last_occur = (last_occurance_search(nums, arr.size()-1, 0, target, ans)-1);
-        first_occur = first_occurance_search(nums, arr.size()-1, 0, target, ans);
+        last_occur = (last_occurance_search(arr, arr.size()-1, 0, target, ans)-1);
+        first_occur = first_occurance_search(arr, arr.size()-1, 0, target, ans);
         
         if(first_occur >= arr.size() || arr[first_occur] != target)
         {
@@ -106,6 +112,6 @@ int main()
     pair<int, int> ans;
     ans = findFirstandLastOccurance_optimal(arr1, k);
 
-    cout << ans.first << " " << ans.second << " ";      
-    
+    cout << "First occurance: " << ans.first << " Last occurance: " << ans.second << endl;      
+    cout << "Number of occurances: " << (ans.second-ans.first+1) << endl;
 }
