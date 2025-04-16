@@ -6,8 +6,8 @@ using namespace std;
     (with distinct values). Now the array is rotated between 1 to N 
     times which is unknown. Find how many times the array has been rotated. 
 
-    TC -> 
-    SC -> 
+    TC -> O(log2N)
+    SC -> O(1)
 */
 int minIdx(int idx1, int idx2, vector<int> &arr)
 {
