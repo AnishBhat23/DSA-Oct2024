@@ -17,7 +17,12 @@ using namespace std;
 
 int calcTotHours(vector<int>&arr, int hourly)
 {
-
+    int totalHours = 0;
+    for(int i = 0; i<arr.size(); i++)
+    {
+        totalHours += ceil(arr[i]/hourly);
+    }
+    return totalHours;
 }
 
 
