@@ -11,16 +11,26 @@ using namespace std;
     Find the minimum number of bananas ‘k’ to eat per hour so that the monkey can eat 
     all the bananas within ‘h’ hours.
 
-    TC -> ()
-    SC -> ()
+    TC -> O(log2N)
+    SC -> O(1)
 */
 
-int calcTotHours(vector<int>&arr, int hourly)
+int findMax(vector<int> &v) {
+    int maxi = INT_MIN;
+    int n = v.size();
+    //find the maximum:
+    for (int i = 0; i < n; i++) {
+        maxi = max(maxi, v[i]);
+    }
+    return maxi;
+}
+
+long long calcTotHours(vector<int>&arr, int hourly)
 {
-    int totalHours = 0;
+    long long totalHours = 0;
     for(int i = 0; i<arr.size(); i++)
     {
-        totalHours += ceil(arr[i]/hourly);
+        totalHours += ceil((double)(arr[i]) / (double)(hourly));
     }
     return totalHours;
 }
@@ -28,22 +38,25 @@ int calcTotHours(vector<int>&arr, int hourly)
 
 int kokoEatingBananas(vector<int>&arr, int n, int h)
 {
-    int low = 1, high = *max_element(arr.begin(), arr.end());
+    int low = 1, high = findMax(arr);
 
     while(low <= high)
     {
         int mid = (low+high)/2;
-        int totalH = calcTotHours(arr, mid);
-        if(totalH <= h)
+        long long totalH = calcTotHours(arr, mid);
+        if(totalH < h)
         {
             high = mid - 1;
         }
-        else
+        else if(totalH > h)
         {
             low = mid + 1;
         }
+        else
+        {
+            return mid;
+        }
     }
-
     return low;   
 }
 

@@ -25,26 +25,26 @@ int search_in_rotated_sorted_array(vector<int> &arr, int high, int low, int ansI
 {
     if(low == high)
     {
-        return minIdx(low,ansIdx);
+        return minIdx(low,ansIdx,arr);
     }
 
     int mid = (high+low)/2;
 
     if(arr[low] <= arr[high])
     {
-        return minIdx(low,ansIdx);
+        return minIdx(low,ansIdx,arr);
     }
 
     if(arr[low] <= arr[mid])
     {
         low = mid+1;
-        ansIdx = minIdx(ansIdx, low);
+        ansIdx = minIdx(ansIdx, low, arr);
         return search_in_rotated_sorted_array(arr,high,low,ansIdx);
     }
     else
     {
         high = mid-1;
-        ansIdx = minIdx(ansIdx, mid);
+        ansIdx = minIdx(ansIdx, mid, arr);
         return search_in_rotated_sorted_array(arr,high,low,ansIdx);        
     } 
 }
@@ -71,5 +71,5 @@ int main()
     int ans;
     ans = find_num_rotations_in_rotated_sorted_array(arr1);
 
-    cout << "Minimum element : " << ans << endl;      
+    cout << "Array has been rotated " << ans << " times."<< endl;      
 }
