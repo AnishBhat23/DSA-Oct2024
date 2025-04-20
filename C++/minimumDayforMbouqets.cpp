@@ -9,7 +9,7 @@ using namespace std;
     Find the minimum number of days required to make at least ‘m' bouquets each containing 'k' roses. 
     Return -1 if it is not possible.
 
-    TC -> O(log2N)
+    TC -> O(O(log(max(arr[])-min(arr[])+1) * N))
     SC -> O(1)
 */
 

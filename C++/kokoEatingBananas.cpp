@@ -11,7 +11,7 @@ using namespace std;
     Find the minimum number of bananas ‘k’ to eat per hour so that the monkey can eat 
     all the bananas within ‘h’ hours.
 
-    TC -> O(log2N)
+    TC -> O(N * log(max(a[])))
     SC -> O(1)
 */
 
