@@ -116,7 +116,40 @@ Node* insertatPos(Node* head, int data, int pos)
 
 Node* deleteAtPos(Node* head, int pos)
 {
+    Node* itr = head;
+    Node* prevItr = head;
+    Node* ans = nullptr;
+
+    if(pos == 1)
+    {
+        ans = deleteHead(head);
+        return ans;
+    }
+
+    int count = 1;
+    while(count < pos)
+    {
+        if(itr->next == nullptr)
+        {
+            break;
+        }
+        prevItr = itr;
+        itr = itr->next;
+        count++;
+    }
+
+    if(itr->next != nullptr)
+    {
+        prevItr->next = itr->next;
+        free(itr);
+    } 
+    else
+    {
+        free(itr);
+    }
     
+    ans = head;
+    return ans;
 }
 
 int main()
