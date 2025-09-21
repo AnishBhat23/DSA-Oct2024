@@ -52,7 +52,7 @@ Node* deleteHead(Node* head)
     Node* temp = head;
 
     head = head->next;
-    free(temp);
+    delete temp;
 
     return head;
 }
@@ -74,7 +74,7 @@ void deleteTail(Node* head)
     {
         temp = temp->next;
     }
-    free(temp->next);
+    delete (temp->next);
 }
 
 Node* insertatPos(Node* head, int data, int pos)
@@ -141,11 +141,11 @@ Node* deleteAtPos(Node* head, int pos)
     if(itr->next != nullptr)
     {
         prevItr->next = itr->next;
-        free(itr);
+        delete (itr);
     } 
     else
     {
-        free(itr);
+        delete (itr);
     }
     
     ans = head;
