@@ -49,6 +49,11 @@ void printLL(Node* head)
 
 Node* deleteHead(Node* head)
 {
+    if(head == nullptr || head->next == nullptr)
+    {
+        return nullptr;
+    }
+    
     Node* temp = head;
 
     head = head->next;
@@ -67,14 +72,22 @@ Node* insertHead(Node* head, int data)
     return head;
 }
 
-void deleteTail(Node* head)
+Node* deleteTail(Node* head)
 {
+    if(head == nullptr || head->next == nullptr)
+    {
+        return nullptr;
+    }
+
     Node* temp = head;
-    while(temp->next != nullptr)
+    while(temp->next->next != nullptr)
     {
         temp = temp->next;
     }
     delete (temp->next);
+    temp->next == nullptr;
+
+    return head;
 }
 
 Node* insertatPos(Node* head, int data, int pos)
