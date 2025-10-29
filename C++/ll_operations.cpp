@@ -165,6 +165,29 @@ Node* deleteAtPos(Node* head, int pos)
     return ans;
 }
 
+Node* reverseLL(Node* head)
+{
+    if(head == nullptr)
+    {
+        return nullptr;
+    }
+
+    Node* prevNode = nullptr;
+    Node* currNode = head;
+    Node* nextNode = nullptr;
+
+    while(currNode != nullptr)
+    {
+        nextNode = currNode->next;
+        currNode->next = prevNode;
+
+        prevNode = currNode;
+        currNode = nextNode;
+    }
+        
+    return prevNode;
+}
+
 int main()
 {
     vector<int> arr = {2, 5 ,8 ,7, 10};
@@ -177,8 +200,10 @@ int main()
     
     insertatPos(head, 12, 5);
 
-    insertatPos(head, 15, 5);
+    insertatPos(head, 15, 6);
 
-    printLL(head);
+    Node* newHead = reverseLL(head);
+
+    printLL(newHead);
 
 }
