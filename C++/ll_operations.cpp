@@ -188,6 +188,23 @@ Node* reverseLL(Node* head)
     return prevNode;
 }
 
+Node* reverseLLRecursive(Node* head)
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+
+    Node* newHead = reverseLLRecursive(head->next);
+
+    Node* front = head->next;
+
+    front->next = head;
+    head->next = NULL;
+
+    return newHead;
+}
+
 int main()
 {
     vector<int> arr = {2, 5 ,8 ,7, 10};
