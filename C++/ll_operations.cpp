@@ -205,6 +205,46 @@ Node* reverseLLRecursive(Node* head)
     return newHead;
 }
 
+Node* deleteMiddle(Node* head) {
+
+    if(head->next == nullptr)
+    {
+        return nullptr;
+    }
+
+    if(head->next->next == nullptr)
+    {
+        head->next = nullptr;
+        return head;
+    }
+
+    Node* slow = head;
+    Node* prevslow = slow;
+    Node* fast = head;
+
+    while(fast != nullptr && fast->next != nullptr && fast->next->next != nullptr)
+    {
+        prevslow = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    if(fast->next == nullptr)
+    {
+        Node* mid = slow;
+        prevslow->next = mid->next;
+    }
+
+    else if(fast->next->next == nullptr)
+    {
+        prevslow = slow;
+        Node* mid = slow->next;
+        prevslow->next = mid->next;
+    }
+
+    return head;
+}
+
 int main()
 {
     vector<int> arr = {2, 5 ,8 ,7, 10};

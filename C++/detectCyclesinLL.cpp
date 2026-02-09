@@ -37,23 +37,22 @@ Node* convertArr2LL(vector<int> &arr)
     return head;
 }
 
-bool hasCycle(Node *head) {
+Node *hasCycle(Node *head) {
         Node *slow = head;
         Node *fast = head;
 
         while(fast != nullptr && fast->next != nullptr && fast->next->next != nullptr)
         {
-            slow = slow->next;
-            fast = fast->next->next;
+            slow = head;
 
-            if(slow == fast)
+            while(slow != fast)
             {
-                return true;
+                slow = slow->next;
+                fast = fast->next;
             }
-
+            return slow;
         }
-
-        return false;
+        return nullptr;
     }
 
 int main()
